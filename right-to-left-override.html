@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Text Translator</title>
+  <style>
+    .flipped-text {
+      transform: scaleX(-1);
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Text Translator</h1>
+
+  <label for="inputText">Enter Text:</label>
+  <br>
+  <textarea id="inputText" rows="4" cols="50"></textarea>
+
+  <br>
+  <button onclick="translateText()">Flip Text</button>
+
+  <h2>Translated Text:</h2>
+  <p id="outputText"></p>
+
+  <script>
+    function translateText() {
+      var inputText = document.getElementById("inputText").value;
+      var rightToLeftUnicode = "&#x202e;"; // Right-to-left Unicode character
+      var flippedText = `<span class="flipped-text">${rightToLeftUnicode}${inputText}</span>`;
+      document.getElementById("outputText").innerHTML = flippedText;
+    }
+  </script>
+
+</body>
+
+</html>
