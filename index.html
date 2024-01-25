@@ -21,6 +21,8 @@
 
   <br>
   <button onclick="translateText()">Flip Text</button>
+  <button onclick="copyText()">Copy</button>
+  <button onclick="downloadText()">Download as Text</button>
 
   <h2>Translated Text:</h2>
   <p id="outputText"></p>
@@ -31,6 +33,29 @@
       var rightToLeftUnicode = "&#x202e;"; // Right-to-left Unicode character
       var flippedText = `<span class="flipped-text">${rightToLeftUnicode}${inputText}</span>`;
       document.getElementById("outputText").innerHTML = flippedText;
+    }
+
+    function copyText() {
+      var outputText = document.getElementById("outputText");
+      var range = document.createRange();
+      range.selectNode(outputText);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+    }
+
+    function downloadText() {
+      var outputText = document.getElementById("outputText").innerText;
+      var blob = new Blob([outputText], { type: "text/plain" });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "text.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     }
   </script>
 
